@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 import NextLink from 'next/link';
 import './styles.css';
 
-const Link = ({ href, ...props }) => {
+const Link = ({href}:any, {...props}) => {
   const pathname = usePathname();
   const isActive = href === pathname;
 
