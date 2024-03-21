@@ -4,9 +4,8 @@ import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { usePathname } from 'next/navigation';
 import NextLink from 'next/link';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import LoginForm from "../components/LoginForm";
 
 const Link = ({href, ...props}:any) => {
     const pathname = usePathname();
@@ -55,44 +54,10 @@ const NavBarPartial = () => {
   );
 };
 
-type Inputs = {
-    username: string
-    password: string
-}
-
 export default function Login() {
     const [loggedIn, setLoggedIn] = useState(false);
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm<Inputs>()
-    console.log(watch("username"));
-    console.log(watch("password"));
-
-    const router = useRouter();
-    
-    const onSubmit = (data: any) => {
-        // Handle form submission here
-        console.log(data);
-        // Redirect to Home page
-        localStorage.setItem('loggedInUser', "true");
-        setLoggedIn(true);
-        router.push('/homepage');
-    };
-
-    /*let loggedInUserValue = localStorage.getItem('loggedInUser');
-    if (loggedInUserValue != null) {
-      loggedInUserValue = loggedInUserValue.replaceAll('"','');
-    }
-    let isLoggedIn = false;
-    if (loggedInUserValue === "true") {
-      isLoggedIn = true;
-    }*/
 
     useEffect(() => {
-      // Check if the user is logged in
       const loggedInUser = localStorage.getItem('loggedInUser');
       if (loggedInUser) {
         setLoggedIn(true);
@@ -109,11 +74,7 @@ export default function Login() {
                     {loggedIn ? <NavBarFull /> : <NavBarPartial />}
                     <Text color="gray">Here you can log in.</Text>
                 </Flex>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register("username", { required: true })} placeholder="Username" />
-                    <input type="password" {...register("password", { required: true })} placeholder="Password" />
-                    <button type="submit">Login</button>
-                </form>
+                <LoginForm />
             </Container>
         </main>
     );

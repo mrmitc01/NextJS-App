@@ -4,6 +4,7 @@ import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { usePathname } from 'next/navigation';
 import NextLink from 'next/link';
+import AccountForm from "../components/AccountForm";
 
 const Link = ({href, ...props}:any) => {
     const pathname = usePathname();
@@ -45,6 +46,7 @@ export default function Account() {
                     <Heading>Account</Heading>
                     <NavBar />
                     <Text color="gray">Here you can manage your account.</Text>
+                    <AccountForm />
                 </Flex>
             </Container>
         </main>

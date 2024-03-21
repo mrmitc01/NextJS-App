@@ -5,11 +5,10 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
 
 export default function App() {
-  //const router = useRouter();
-  //router.push('/login');
+  const router = useRouter();
   useEffect(() => {
-    // Perform localStorage action
     localStorage.clear();
+    router.push('/login');
   }, []);
   
   return (
