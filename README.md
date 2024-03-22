@@ -1,6 +1,8 @@
 # Notes
 To do the equivalent of logging out, the cache will need to be cleared. This can be done manually. Alternatively, navigating to this link https://next-js-app-eta.vercel.app/ will automatically clear the cache for the website. This was done to make testing more convenient.
 
+A great deal of the backend API and form code was adapted from https://www.freecodecamp.org/news/react-form-validation-zod-react-hook-form/.
+
 # Known Bugs
 The form submission buttons are invisible. The root cause has yet to be determined, but those buttons properly appear during local testing at http://localhost:3000.
 
