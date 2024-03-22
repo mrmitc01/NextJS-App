@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormField } from "./FormField";
 import axios from "axios";
+import { Button } from '@radix-ui/themes';
 
 function LoginForm() {
   const {
@@ -58,26 +59,24 @@ function LoginForm() {
 
   return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid col-auto">
+        <div className="grid col-auto space-y-2">
           <LoginFormField
             type="email"
-            placeholder="Username"
             name="username"
             register={register}
             error={errors.username}
+            label="Email address"
           />
-
           <LoginFormField
             type="password"
-            placeholder="Password"
             name="password"
             register={register}
             error={errors.password}
+            label="Password"
           />
-
-          <button type="submit" className="submit-button">
-            Log In
-          </button>
+          <Button type="submit" className="submit-button w-80 h-24" color="blue" >
+            Continue with email
+          </Button>
         </div>
       </form>
   );

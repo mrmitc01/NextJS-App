@@ -1,4 +1,4 @@
-import { AccountUserSchema } from "../../types";
+import { PasswordUserSchema } from "../../types";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -6,8 +6,8 @@ export async function POST(request: Request) {
   const body = await request.json();
   console.log(body);
 
-  // Use Zod to validate the received data against the AccountUserSchema
-  const result = AccountUserSchema.safeParse(body);
+  // Use Zod to validate the received data against the PasswordUserSchema
+  const result = PasswordUserSchema.safeParse(body);
 
   // Check if the validation is successful
   if (result.success) {

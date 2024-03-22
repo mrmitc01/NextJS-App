@@ -2,10 +2,10 @@
 
 import { Container, Flex, Heading, Text, Link } from "@radix-ui/themes";
 import { useState, useEffect } from 'react';
-import LoginForm from "../components/LoginForm";
+import PasswordForm from "../components/PasswordForm";
 import Logo from "../components/Logo";
 
-export default function Login() {
+export default function Password() {
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -22,13 +22,15 @@ export default function Login() {
             <Logo />
             <Container size="1" className="flex min-h-screen flex-col items-center justify-between pl-60 pt-32">
                 <Flex direction="column">
-                    <Heading>Sign In</Heading>
+                    <Heading>Create password</Heading>
+                    <Text color="gray">Use a minimum of 10 characters, including letters, lowercase letters, and numbers.</Text>
                 </Flex>
-                <LoginForm />
-                <Text color="gray">or use one of these options</Text>
+                <PasswordForm />
                 <br/>
-                <Text>Don't have an account? {' '}
-                  <Link href="/register" color="blue">Register</Link>
+                <Text>By creating an account, you agree with our {' '}
+                  <Link href="https://www.google.com" color="blue">Terms and Conditions</Link>
+                  {' '} and {' '}
+                  <Link href="https://www.google.com" color="blue">Privacy Statement.</Link>
                 </Text>
             </Container>
         </main>

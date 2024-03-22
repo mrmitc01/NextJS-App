@@ -1,17 +1,18 @@
-import { LoginFormFieldProps, RegisterFormFieldProps, AccountFormFieldProps } from "../types.js";
+import { LoginFormFieldProps, RegisterFormFieldProps, PasswordFormFieldProps } from "../types.js";
 
 export const LoginFormField: React.FC<LoginFormFieldProps> = ({
   type,
-  placeholder,
   name,
   register,
   error,
   valueAsNumber,
+  label,
 }) => (
   <>
+    <label>{label}</label>
     <input
+      className="bg-gray-200 w-80 h-10"
       type={type}
-      placeholder={placeholder}
       {...register(name, { valueAsNumber, required: true })}
     />
     {error && <span className="error-message">{error.message}</span>}
@@ -20,34 +21,36 @@ export const LoginFormField: React.FC<LoginFormFieldProps> = ({
 
 export const RegisterFormField: React.FC<RegisterFormFieldProps> = ({
   type,
-  placeholder,
   name,
   register,
   error,
   valueAsNumber,
+  label,
 }) => (
   <>
+    <label>{label}</label>
     <input
+      className="bg-gray-200 w-80 h-10"
       type={type}
-      placeholder={placeholder}
       {...register(name, { valueAsNumber, required: true })}
     />
     {error && <span className="error-message">{error.message}</span>}
   </>
 );
 
-export const AccountFormField: React.FC<AccountFormFieldProps> = ({
+export const PasswordFormField: React.FC<PasswordFormFieldProps> = ({
   type,
-  placeholder,
   name,
   register,
   error,
   valueAsNumber,
+  label,
 }) => (
   <>
+    <label>{label}</label>
     <input
+      className="bg-gray-200 w-80 h-10"
       type={type}
-      placeholder={placeholder}
       {...register(name, { valueAsNumber, required: true })}
     />
     {error && <span className="error-message">{error.message}</span>}

@@ -1,28 +1,34 @@
 import { useForm } from "react-hook-form";
-import { AccountFormData, AccountUserSchema, AccountValidFieldNames } from "../types";
+import { PasswordFormData, PasswordUserSchema, PasswordValidFieldNames } from "../types";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AccountFormField } from "./FormField";
+import { PasswordFormField } from "./FormField";
 import axios from "axios";
+import { Button } from '@radix-ui/themes';
 
-function AccountForm() {
+function PasswordForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<AccountFormData>({
-    resolver: zodResolver(AccountUserSchema)
+  } = useForm<PasswordFormData>({
+    resolver: zodResolver(PasswordUserSchema)
   });
   
-  const onSubmit = async (data: AccountFormData) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
+
+  const onSubmit = async (data: PasswordFormData) => {
     try {
-        const response = await axios.post("/api/accountform", data); // Make a POST request
+        const response = await axios.post("/api/passwordform", data); // Make a POST request
         const { errors = {} } = response.data; // Destructure the 'errors' property from the response data
   
         // Define a mapping between server-side field names and their corresponding client-side names
-        const fieldErrorMapping: Record<string, AccountValidFieldNames> = {
-          username: "username",
+        const fieldErrorMapping: Record<string, PasswordValidFieldNames> = {
           password: "password",
+          confirmpassword: "confirmpassword",
         };
   
         // Find the first field with an error in the response data
@@ -41,6 +47,9 @@ function AccountForm() {
         }
         else {
             console.log("SUCCESS", data);
+            localStorage.setItem('loggedInUser', "true");
+            setLoggedIn(true);
+            router.push('/homepage');
         }
       } catch (error) {
         console.log("ERROR", data);
@@ -50,29 +59,27 @@ function AccountForm() {
 
   return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid col-auto">
-          <AccountFormField
-            type="email"
-            placeholder="Username"
-            name="username"
-            register={register}
-            error={errors.username}
-          />
-
-          <AccountFormField
+        <div className="grid col-auto space-y-2">
+          <PasswordFormField
             type="password"
-            placeholder="Password"
             name="password"
             register={register}
             error={errors.password}
+            label="Password"
           />
-
-          <button type="submit" className="submit-button">
-            Update
-          </button>
+          <PasswordFormField
+            type="password"
+            name="confirmpassword"
+            register={register}
+            error={errors.confirmpassword}
+            label="Confirm password"
+          />
+          <Button type="submit" className="submit-button w-80 h-24" color="blue" >
+            Create account
+          </Button>
         </div>
       </form>
   );
 }
 
-export default AccountForm;
+export default PasswordForm;

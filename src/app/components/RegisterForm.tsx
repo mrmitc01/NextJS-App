@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { RegisterFormData, RegisterUserSchema, RegisterValidFieldNames } from "../types";
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormField } from "./FormField";
 import axios from "axios";
+import { Button } from '@radix-ui/themes';
 
 function RegisterForm() {
   const {
@@ -16,7 +16,6 @@ function RegisterForm() {
     resolver: zodResolver(RegisterUserSchema)
   });
   
-  const [loggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
 
   const onSubmit = async (data: RegisterFormData) => {
@@ -27,7 +26,6 @@ function RegisterForm() {
         // Define a mapping between server-side field names and their corresponding client-side names
         const fieldErrorMapping: Record<string, RegisterValidFieldNames> = {
           username: "username",
-          password: "password",
         };
   
         // Find the first field with an error in the response data
@@ -46,9 +44,7 @@ function RegisterForm() {
         }
         else {
             console.log("SUCCESS", data);
-            localStorage.setItem('loggedInUser', "true");
-            setLoggedIn(true);
-            router.push('/homepage');
+            router.push('/password');
         }
       } catch (error) {
         console.log("ERROR", data);
@@ -58,26 +54,17 @@ function RegisterForm() {
 
   return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid col-auto">
+        <div className="grid col-auto space-y-2">
           <RegisterFormField
             type="email"
-            placeholder="Username"
             name="username"
             register={register}
             error={errors.username}
+            label="Email address"
           />
-
-          <RegisterFormField
-            type="password"
-            placeholder="Password"
-            name="password"
-            register={register}
-            error={errors.password}
-          />
-
-          <button type="submit" className="submit-button">
-            Register
-          </button>
+          <Button type="submit" className="submit-button w-80 h-24" color="blue" >
+            Continue with email
+          </Button>
         </div>
       </form>
   );
