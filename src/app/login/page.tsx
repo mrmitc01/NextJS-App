@@ -27,7 +27,7 @@ export default function Login() {
                 <LoginForm />
                 <Text color="gray">or use one of these options</Text>
                 <br/>
-                <Text>Don't have an account? {' '}
+                <Text>Don&apos;t have an account? {' '}
                   <Link href="/register" color="blue">Register</Link>
                 </Text>
             </Container>
