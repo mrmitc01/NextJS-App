@@ -1,3 +1,10 @@
+# Notes
+To do the equivalent of logging out, the cache will need to be cleared. This can be done manually. Alternatively, navigating to this link https://next-js-app-eta.vercel.app/ will automatically clear the cache for the website. This was done to make testing more convenient.
+
+# Known Bugs
+The form submission buttons are invisible. The root cause has yet to be determined, but those buttons properly appear during local testing at http://localhost:3000.
+
+# Default Information
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
